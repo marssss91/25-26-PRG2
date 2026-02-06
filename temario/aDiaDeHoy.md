@@ -7,6 +7,7 @@
 - Criterios de refactorización que conduzcan a un main() limpio como objetivo.
 - Como dejar una historia adecuadamente contada en los commits del repo.
 - Ejemplo hecho en clase: un [refactor...](https://github.com/ibuprofenofernandez/25-26-PRG2/commits/reto-001)
+  - [Código limpio!](https://github.com/ibuprofenofernandez/25-26-PRG2/commit/30aa0d0792f47e7924420b4f8abe5b754d406c42)
 
 ## 3 feb
 
