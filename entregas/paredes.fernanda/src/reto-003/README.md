@@ -1,4 +1,4 @@
-Reto 003 — Refactoring Buscaminas y ExamenMina
+Reto 003 — Refactoring Buscaminas y ExamenMina 
 ¿Qué es este reto?
 Dado un código con errores funcionales y malas prácticas, el objetivo es obtener una versión correcta y limpia del mismo. Los códigos implementan una versión del juego Buscaminas en Java.
 
