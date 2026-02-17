@@ -1,16 +1,20 @@
 import java.util.Scanner;
 
 public class Buscaminas {
+
+    static final int FILAS = 5;
+    static final int COLUMNAS = 7;
+    static final int TOTAL_MINAS = 5;
+    static final int MAX_EXPLOSIONES = 3;
+
     public static void main(String[] args) {
-        int minas = 0;
+        int explosiones = 0;
         int celdasVacias = 0;
-        int filaX = 0;
-        int columnaY = 0;
         boolean salida = false;
 
-        boolean[][] tableroOculto = new boolean[6][8];
+        boolean[][] tableroOculto = new boolean[FILAS + 1][COLUMNAS + 1];
 
-        String[][] tableroVisible = new String[6][8];
+        String[][] tableroVisible = new String[FILAS + 1][COLUMNAS + 1];
 
         tableroVisible[0][0] = "**"; tableroVisible[0][1] = " 1"; tableroVisible[0][2] = " 2"; tableroVisible[0][3] = " 3"; tableroVisible[0][4] = " 4"; tableroVisible[0][5] = " 5"; tableroVisible[0][6] = " 6"; tableroVisible[0][7] = " 7";
         tableroVisible[1][0] = " 1"; tableroVisible[1][1] = "  "; tableroVisible[1][2] = "  "; tableroVisible[1][3] = "  "; tableroVisible[1][4] = "  "; tableroVisible[1][5] = "  "; tableroVisible[1][6] = "  "; tableroVisible[1][7] = "  ";
@@ -20,56 +24,75 @@ public class Buscaminas {
         tableroVisible[5][0] = " 5"; tableroVisible[5][1] = "  "; tableroVisible[5][2] = "  "; tableroVisible[5][3] = "  "; tableroVisible[5][4] = "  "; tableroVisible[5][5] = "  "; tableroVisible[5][6] = "  "; tableroVisible[5][7] = "  ";
 
         int minasColocadas = 0;
-        while (minasColocadas < 5) {
-            int fila = (int)((Math.random() * 5) + 1);
-            int columna = (int)((Math.random() * 7) + 1);
+        while (minasColocadas < TOTAL_MINAS) {
+            int fila = (int)((Math.random() * FILAS) + 1);
+            int columna = (int)((Math.random() * COLUMNAS) + 1);
             if (!tableroOculto[fila][columna]) {
                 tableroOculto[fila][columna] = true;
                 minasColocadas++;
             }
         }
 
+        Scanner sc = new Scanner(System.in);
+
         while (!salida) {
             for (int x = 0; x < tableroVisible.length; x++) {
                 System.out.print("|");
-                for (int y = 0; y < 8; y++) {
+                for (int y = 0; y < tableroVisible[x].length; y++) {
                     System.out.print(tableroVisible[x][y]);
                 }
                 System.out.println("|");
             }
 
-            System.out.println("Introduzca posicion X");
-            Scanner sc = new Scanner(System.in);
-            filaX = sc.nextInt();
+            int filaX;
+            int columnaY;
 
-            System.out.println("Introduzca posicion Y");
-            columnaY = sc.nextInt();
+            while (true) {
+                System.out.println("Introduzca posicion X (1-" + FILAS + ")");
+                filaX = sc.nextInt();
+                System.out.println("Introduzca posicion Y (1-" + COLUMNAS + ")");
+                columnaY = sc.nextInt();
+
+                if (filaX < 1 || filaX > FILAS || columnaY < 1 || columnaY > COLUMNAS) {
+                    System.out.println("Posicion fuera del tablero, intente de nuevo.");
+                } else if (!tableroVisible[filaX][columnaY].equals("  ")) {
+                    System.out.println("Esa casilla ya fue descubierta, elija otra.");
+                } else {
+                    break;
+                }
+            }
 
             if (tableroOculto[filaX][columnaY]) {
                 tableroVisible[filaX][columnaY] = "**";
-                minas++;
+                explosiones++;
             } else {
                 tableroVisible[filaX][columnaY] = "--";
                 celdasVacias++;
             }
 
-            for (int x = 0; x < tableroVisible.length; x++) {
-                System.out.print("|");
-                for (int y = 0; y < 8; y++) {
-                    System.out.print(tableroVisible[x][y]);
+            if (explosiones >= MAX_EXPLOSIONES) {
+                for (int x = 0; x < tableroVisible.length; x++) {
+                    System.out.print("|");
+                    for (int y = 0; y < tableroVisible[x].length; y++) {
+                        System.out.print(tableroVisible[x][y]);
+                    }
+                    System.out.println("|");
                 }
-                System.out.println("|");
-            }
-
-            if (minas == 3) {
                 System.out.println("Lo siento, ha perdido");
                 salida = true;
-            }
-
-            if (celdasVacias == 30) {
+            } else if (celdasVacias == FILAS * COLUMNAS - TOTAL_MINAS) {
+                for (int x = 0; x < tableroVisible.length; x++) {
+                    System.out.print("|");
+                    for (int y = 0; y < tableroVisible[x].length; y++) {
+                        System.out.print(tableroVisible[x][y]);
+                    }
+                    System.out.println("|");
+                }
                 System.out.println("Enhorabuena, ha ganado");
                 salida = true;
             }
         }
+
+        sc.close();
     }
 }
