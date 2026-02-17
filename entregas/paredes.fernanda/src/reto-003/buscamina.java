@@ -4,8 +4,6 @@ public class Buscaminas {
     public static void main(String[] args) {
         int minas = 0;
         int celdasVacias = 0;
-        int filaA = 0;
-        int columnaB = 0;
         int filaX = 0;
         int columnaY = 0;
         boolean salida = false;
@@ -21,25 +19,15 @@ public class Buscaminas {
         tableroVisible[4][0] = " 4"; tableroVisible[4][1] = "  "; tableroVisible[4][2] = "  "; tableroVisible[4][3] = "  "; tableroVisible[4][4] = "  "; tableroVisible[4][5] = "  "; tableroVisible[4][6] = "  "; tableroVisible[4][7] = "  ";
         tableroVisible[5][0] = " 5"; tableroVisible[5][1] = "  "; tableroVisible[5][2] = "  "; tableroVisible[5][3] = "  "; tableroVisible[5][4] = "  "; tableroVisible[5][5] = "  "; tableroVisible[5][6] = "  "; tableroVisible[5][7] = "  ";
 
-        filaA = (int)((Math.random() * 5) + 1);
-        columnaB = (int)((Math.random() * 7) + 1);
-        tableroOculto[filaA][columnaB] = true;
-
-        filaA = (int)((Math.random() * 5) + 1);
-        columnaB = (int)((Math.random() * 7) + 1);
-        tableroOculto[filaA][columnaB] = true;
-
-        filaA = (int)((Math.random() * 5) + 1);
-        columnaB = (int)((Math.random() * 7) + 1);
-        tableroOculto[filaA][columnaB] = true;
-
-        filaA = (int)((Math.random() * 5) + 1);
-        columnaB = (int)((Math.random() * 7) + 1);
-        tableroOculto[filaA][columnaB] = true;
-
-        filaA = (int)((Math.random() * 5) + 1);
-        columnaB = (int)((Math.random() * 7) + 1);
-        tableroOculto[filaA][columnaB] = true;
+        int minasColocadas = 0;
+        while (minasColocadas < 5) {
+            int fila = (int)((Math.random() * 5) + 1);
+            int columna = (int)((Math.random() * 7) + 1);
+            if (!tableroOculto[fila][columna]) {
+                tableroOculto[fila][columna] = true;
+                minasColocadas++;
+            }
+        }
 
         while (!salida) {
             for (int x = 0; x < tableroVisible.length; x++) {
