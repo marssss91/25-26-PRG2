@@ -35,17 +35,9 @@ public class Carrera {
 
     private void avanzarTurno() {
         turno++;
-        int caballoActual = seleccionarCaballoAlAzar();
-        int avance = generarAvanceAleatorio();
+        int caballoActual = random.nextInt(caballos.length);
+        int avance = random.nextInt(3);
         caballos[caballoActual].avanzar(avance);
-    }
-
-    private int seleccionarCaballoAlAzar() {
-        return random.nextInt(caballos.length);
-    }
-
-    private int generarAvanceAleatorio() {
-        return random.nextInt(3);
     }
 
     private boolean hayGanador() {
@@ -71,17 +63,21 @@ public class Carrera {
 
     private void dibujarPista(Caballo caballo) {
         System.out.print(caballo.getNombre() + ": ");
-        for (int i = 0; i < caballo.getPosicion(); i++) {
+        dibujarPosicion(caballo.getPosicion());
+        System.out.println(";-;'");
+    }
+
+    private void dibujarPosicion(int posicion) {
+        for (int i = 0; i < posicion; i++) {
             System.out.print(" ");
         }
-        System.out.println(";-;'");
     }
 
     private void mostrarGanador() {
         System.out.println("=== FIN DE LA CARRERA ===");
-        for (Caballo caballo : caballos) {
-            if (caballo.llegadaAlFinal(LONGITUD_PISTA)) {
-                System.out.println("¡Ganó " + caballo.getNombre() + "!");
+        for (int i = 0; i < caballos.length; i++) {
+            if (caballos[i].llegadaAlFinal(LONGITUD_PISTA)) {
+                System.out.println("¡Ganó el caballo " + (i + 1) + "!");
             }
         }
     }
