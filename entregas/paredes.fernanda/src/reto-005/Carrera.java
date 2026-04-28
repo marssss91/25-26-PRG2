@@ -6,6 +6,7 @@ public class Carrera {
     private Caballo[] caballos;
     private int turno;
     private Random random;
+    private Presentador presentador;
 
     public Carrera() {
         this(CANTIDAD_CABALLOS);
@@ -15,6 +16,7 @@ public class Carrera {
         this.caballos = new Caballo[cantidadCaballos];
         this.turno = 0;
         this.random = new Random();
+        this.presentador = new Presentador();
         inicializarCaballos();
     }
 
@@ -25,12 +27,12 @@ public class Carrera {
     }
 
     public void jugar() {
-        mostrarInicio();
+        presentador.mostrarInicio();
         while (!hayGanador()) {
             avanzarTurno();
-            mostrarEstado();
+            presentador.mostrarEstado(caballos, turno);
         }
-        mostrarGanador();
+        presentador.mostrarGanadores(caballos);
     }
 
     private void avanzarTurno() {
@@ -47,39 +49,6 @@ public class Carrera {
             }
         }
         return false;
-    }
-
-    private void mostrarInicio() {
-        System.out.println("=== COMIENZA LA CARRERA DE CABALLOS ===\n");
-    }
-
-    private void mostrarEstado() {
-        System.out.println("--- Turno " + turno + " ---");
-        for (Caballo caballo : caballos) {
-            dibujarPista(caballo);
-        }
-        System.out.println();
-    }
-
-    private void dibujarPista(Caballo caballo) {
-        System.out.print(caballo.getNombre() + ": ");
-        dibujarPosicion(caballo.getPosicion());
-        System.out.println(";-;'");
-    }
-
-    private void dibujarPosicion(int posicion) {
-        for (int i = 0; i < posicion; i++) {
-            System.out.print(" ");
-        }
-    }
-
-    private void mostrarGanador() {
-        System.out.println("=== FIN DE LA CARRERA ===");
-        for (int i = 0; i < caballos.length; i++) {
-            if (caballos[i].llegadaAlFinal(LONGITUD_PISTA)) {
-                System.out.println("¡Ganó el caballo " + (i + 1) + "!");
-            }
-        }
     }
 
     public Caballo[] getCaballos() {
