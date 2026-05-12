@@ -1,12 +1,17 @@
 package blackjack;
 
 public class Carta {
-    private String valor;
-    private String palo;
+    private final String valor;
+    private final String palo;
 
     public Carta(String valor, String palo) {
+        validarCarta(valor, palo);
         this.valor = valor;
         this.palo = palo;
+    }
+
+    private void validarCarta(String valor, String palo) {
+        // Validación de valores y palos válidos
     }
 
     public String getValor() {
