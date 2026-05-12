@@ -103,10 +103,15 @@ public class Principal {
 
     private int obtenerOpcion() {
         try {
-            return Integer.parseInt(scanner.nextLine());
+            int opcion = Integer.parseInt(scanner.nextLine());
+            return validarOpcion(opcion) ? opcion : -1;
         } catch (NumberFormatException e) {
             return -1;
         }
+    }
+
+    private boolean validarOpcion(int opcion) {
+        return opcion >= OPCION_PEDIR && opcion <= OPCION_SALIR;
     }
 
     private boolean pedirNuevaPartida() {
