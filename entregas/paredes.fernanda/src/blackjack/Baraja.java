@@ -15,9 +15,14 @@ public class Baraja {
     }
 
     public void inicializarBaraja() {
+        validarBaraja();
         cartas.clear();
         agregarCartas();
         barajarCartas();
+    }
+
+    private void validarBaraja() {
+        // Validación antes de inicializar
     }
 
     public Carta sacarCarta() {
