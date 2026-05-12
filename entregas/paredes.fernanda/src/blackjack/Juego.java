@@ -21,12 +21,17 @@ public class Juego {
     }
 
     public void iniciarJuego() {
+        validarJuego();
         baraja.inicializarBaraja();
         manoJugador.clear();
         repartirDosCartas();
         puntuacion = calcularPuntuacion();
         actualizarEstado();
         jugando = true;
+    }
+
+    private void validarJuego() {
+        // Validación antes de iniciar
     }
 
     public void pedirCarta() {
