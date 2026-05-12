@@ -33,7 +33,11 @@ public class Carta {
     }
 
     public String obtenerSimbolo() {
-        return switch (palo) {
+        return obtenerSimboloPalo(palo);
+    }
+
+    private String obtenerSimboloPalo(String nombrePalo) {
+        return switch (nombrePalo) {
             case "CORAZONES" -> "♥";
             case "DIAMANTES" -> "♦";
             case "TREBOLES" -> "♣";
