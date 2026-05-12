@@ -67,11 +67,20 @@ public class Principal {
     private void mostrarMano() {
         System.out.println("--------------------");
         System.out.print("Mano: ");
+        mostrarCartas();
+        mostrarPuntaje();
+        System.out.println();
+    }
+
+    private void mostrarCartas() {
         List<Carta> mano = juego.obtenerMano();
         for (Carta carta : mano) {
             System.out.print(carta.obtenerRepresentacion());
         }
-        System.out.println(" - Puntaje: " + juego.obtenerPuntuacion() + " ==> " + juego.obtenerEstado());
+    }
+
+    private void mostrarPuntaje() {
+        System.out.print(" - Puntaje: " + juego.obtenerPuntuacion() + " ==> " + juego.obtenerEstado());
     }
 
     private void mostrarEstado() {
