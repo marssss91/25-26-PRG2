@@ -8,6 +8,7 @@ public class Baraja {
     private List<Carta> cartas;
     private static final String[] VALORES = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     private static final String[] PALOS = {"CORAZONES", "DIAMANTES", "TREBOLES", "PICAS"};
+    private static final int TOTAL_CARTAS = 52;
 
     public Baraja() {
         this.cartas = new ArrayList<>();
