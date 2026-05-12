@@ -46,23 +46,39 @@ public class Juego {
     }
 
     public int calcularPuntuacion() {
-        int puntos = 0;
-        int ases = 0;
+        int puntos = sumarValoresCartas();
+        int ases = contarAses();
+        puntos = ajustarPorAses(puntos, ases);
+        return puntos;
+    }
 
+    private int sumarValoresCartas() {
+        int suma = 0;
+        for (Carta carta : manoJugador) {
+            if (carta.getValor().equals("A")) {
+                suma += 11;
+            } else {
+                suma += carta.obtenerValor();
+            }
+        }
+        return suma;
+    }
+
+    private int contarAses() {
+        int ases = 0;
         for (Carta carta : manoJugador) {
             if (carta.getValor().equals("A")) {
                 ases++;
-                puntos += 11;
-            } else {
-                puntos += carta.obtenerValor();
             }
         }
+        return ases;
+    }
 
+    private int ajustarPorAses(int puntos, int ases) {
         while (puntos > LIMITE_PUNTOS && ases > 0) {
             puntos -= 10;
             ases--;
         }
-
         return puntos;
     }
 
