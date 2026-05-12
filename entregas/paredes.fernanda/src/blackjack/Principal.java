@@ -7,6 +7,9 @@ public class Principal {
     private Juego juego;
     private Scanner scanner;
     private boolean ejecutando;
+    private static final int OPCION_PEDIR = 1;
+    private static final int OPCION_NUEVA_PARTIDA = 2;
+    private static final int OPCION_SALIR = 3;
 
     public Principal() {
         this.juego = new Juego();
@@ -51,9 +54,9 @@ public class Principal {
 
     private void procesarOpcion(int opcion) {
         switch (opcion) {
-            case 1 -> pedirCarta();
-            case 2 -> iniciarNuevaPartida();
-            case 3 -> {
+            case OPCION_PEDIR -> pedirCarta();
+            case OPCION_NUEVA_PARTIDA -> iniciarNuevaPartida();
+            case OPCION_SALIR -> {
                 ejecutando = false;
                 juego.plantarse();
             }
