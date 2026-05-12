@@ -10,6 +10,8 @@ public class Principal {
     private static final int OPCION_PEDIR = 1;
     private static final int OPCION_NUEVA_PARTIDA = 2;
     private static final int OPCION_SALIR = 3;
+    private static final String SEPARADOR = "--------------------";
+    private static final String TITULO = "=== Bienvenido al Blackjack ===";
 
     public Principal() {
         this.juego = new Juego();
@@ -23,7 +25,7 @@ public class Principal {
     }
 
     public void ejecutar() {
-        System.out.println("=== Bienvenido al Blackjack ===\n");
+        System.out.println(TITULO + "\n");
         
         while (ejecutando) {
             juego.iniciarJuego();
@@ -45,11 +47,11 @@ public class Principal {
     }
 
     private void mostrarMenu() {
-        System.out.println("--------------------");
-        System.out.println("1. Pedir");
-        System.out.println("2. Empezar de nuevo");
-        System.out.println("3. Salir");
-        System.out.println("--------------------");
+        System.out.println(SEPARADOR);
+        System.out.println(OPCION_PEDIR + ". Pedir");
+        System.out.println(OPCION_NUEVA_PARTIDA + ". Empezar de nuevo");
+        System.out.println(OPCION_SALIR + ". Salir");
+        System.out.println(SEPARADOR);
     }
 
     private void procesarOpcion(int opcion) {
@@ -65,7 +67,7 @@ public class Principal {
     }
 
     private void mostrarMano() {
-        System.out.println("--------------------");
+        System.out.println(SEPARADOR);
         System.out.print("Mano: ");
         mostrarCartas();
         mostrarPuntaje();
