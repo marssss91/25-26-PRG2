@@ -9,6 +9,8 @@ public class Juego {
     private int puntuacion;
     private boolean jugando;
     private String estado;
+    private static final int LIMITE_PUNTOS = 21;
+    private static final int MANO_INICIAL = 2;
 
     public Juego() {
         this.baraja = new Baraja();
@@ -56,7 +58,7 @@ public class Juego {
             }
         }
 
-        while (puntos > 21 && ases > 0) {
+        while (puntos > LIMITE_PUNTOS && ases > 0) {
             puntos -= 10;
             ases--;
         }
@@ -86,10 +88,10 @@ public class Juego {
     }
 
     private void actualizarEstado() {
-        if (puntuacion > 21) {
+        if (puntuacion > LIMITE_PUNTOS) {
             estado = "Perdió";
             jugando = false;
-        } else if (puntuacion == 21 && manoJugador.size() == 2) {
+        } else if (puntuacion == LIMITE_PUNTOS && manoJugador.size() == MANO_INICIAL) {
             estado = "Ganó";
             jugando = false;
         } else {
